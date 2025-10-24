@@ -1,21 +1,35 @@
-# lit-builder
+# Lit-Builder
+
+[![npm version](https://badge.fury.io/js/lit-builder.svg)](https://www.npmjs.com/package/lit-builder)
+[![npm downloads](https://img.shields.io/npm/dm/lit-builder.svg)](https://www.npmjs.com/package/lit-builder)
+![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue)
+![Tree Shakeable](https://img.shields.io/badge/Tree%20Shakeable-Yes-brightgreen)
 
 A builder API for programmatically constructing Lit templates using object notation.
 
-## Features
-
-- **Type-safe template construction** - Build Lit templates with TypeScript support
+**✨ Key Features:**
+- **Type-safe template construction** - Build Lit templates with full TypeScript support
 - **Declarative API** - Define DOM structures using simple JavaScript objects
 - **Full Lit integration** - Supports attributes, properties, events, and directives
 - **Flexible composition** - Mix BuildElements, TemplateResults, and strings seamlessly
 
 ## Installation
 
-```bash
+```sh
 npm install lit-builder
 ```
 
-## Basic Usage
+## Usage
+
+### `build`
+
+Builds a Lit `TemplateResult` from one or more `BuildElement` objects.
+
+```ts
+build(elements: BuildElement | BuildElement[]): TemplateResult
+```
+
+#### Basic Example
 
 ```ts
 import { build } from 'lit-builder';
@@ -36,17 +50,6 @@ class MyElement extends LitElement {
 }
 ```
 
-## API Reference
-
-### `build(elements)`
-
-Builds a Lit `TemplateResult` from one or more `BuildElement` objects.
-
-**Parameters:**
-- `elements: BuildElement | BuildElement[]` - A single element or array of elements to build
-
-**Returns:** `TemplateResult`
-
 ### `BuildElement`
 
 An object representing a DOM element with the following properties:
@@ -62,9 +65,7 @@ interface BuildElement {
 }
 ```
 
-## Examples
-
-### Single Element
+#### Single Element
 
 ```ts
 build({
@@ -73,7 +74,7 @@ build({
 })
 ```
 
-### Element Array
+#### Element Array
 
 ```ts
 build([
@@ -82,7 +83,7 @@ build([
 ])
 ```
 
-### Attributes
+#### Attributes
 
 ```ts
 build({
@@ -95,7 +96,7 @@ build({
 })
 ```
 
-### Properties
+#### Properties
 
 ```ts
 build({
@@ -107,7 +108,7 @@ build({
 })
 ```
 
-### Events
+#### Events
 
 ```ts
 build({
@@ -119,7 +120,7 @@ build({
 })
 ```
 
-### Directives
+#### Directives
 
 ```ts
 import { createRef, ref } from 'lit/directives/ref.js';
@@ -132,7 +133,7 @@ build({
 })
 ```
 
-### Nested Elements
+#### Nested Elements
 
 ```ts
 build({
@@ -153,7 +154,7 @@ build({
 })
 ```
 
-### Fragments (Elements without name)
+#### Fragments (Elements without name)
 
 ```ts
 build({
@@ -165,7 +166,7 @@ build({
 })
 ```
 
-### Mixed Content
+#### Mixed Content
 
 ```ts
 import { html } from 'lit';
@@ -181,9 +182,7 @@ build({
 })
 ```
 
-## Use Cases
-
-### Dynamic Lists
+#### Dynamic Lists
 
 ```ts
 const items = ['Apple', 'Banana', 'Cherry'];
@@ -196,7 +195,7 @@ build(
 )
 ```
 
-### Conditional Rendering
+#### Conditional Rendering
 
 ```ts
 const isLoggedIn = true;
@@ -213,7 +212,7 @@ build([
 ])
 ```
 
-### Programmatic Component Generation
+#### Programmatic Component Generation
 
 ```ts
 function createCard(title: string, content: string) {
@@ -228,7 +227,7 @@ function createCard(title: string, content: string) {
 }
 ```
 
-### Rendering from JSON
+#### Rendering from JSON
 
 ```ts
 // Parse JSON string and render
@@ -239,30 +238,15 @@ build(elements);
 ```
 
 **Note:** JSON only supports serializable values:
-- ✅ `name`
-- ✅ `attributes`
-- ✅ `children`
+- ✅ `name`, `attributes`, `children`
 - ⚠️ `properties` (plain objects/arrays only, no functions or special objects)
-- ❌ `events`
-- ❌ `directives`
+- ❌ `events`, `directives`
 
 ## Limitations
 
-- **Directive values**: Directives like `live()` cannot be used as property/attribute values due to Lit's template literal design. Use the `directives` field for element-level directives like `ref()`.
-- **Static template optimization**: Dynamic template construction doesn't benefit from Lit's static template caching.
+**Directive values**: Directives like `live()` cannot be used as property/attribute values due to Lit's template literal design. Use the `directives` field for element-level directives like `ref()`.
 
-## Development
-
-```bash
-# Install dependencies
-npm install
-
-# Build
-npm run build
-
-# Run examples
-npm run dev
-```
+**Static template optimization**: Dynamic template construction doesn't benefit from Lit's static template caching.
 
 ## License
 
