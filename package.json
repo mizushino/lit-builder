@@ -1,7 +1,7 @@
 {
   "name": "lit-builder",
   "version": "0.1.0",
-  "description": "",
+  "description": "A builder API for programmatically constructing Lit templates using object notation",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
